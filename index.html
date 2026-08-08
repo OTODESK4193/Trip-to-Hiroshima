@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広島・呉・宮島 2日間の旅</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --vermillion: #C73E3A;
+            --navy: #1B2A4A;
+            --gold: #C5A55A;
+            --white: #FFFFFF;
+            --warm-gray: #F5F3F0;
+            --text-dark: #333333;
+            --text-light: #777777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--warm-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6, .serif {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(27,42,74,1) 0%, rgba(199,62,58,0.3) 100%);
+            z-index: 1;
+        }
+
+        header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--gold);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Map Button */
+        .map-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .map-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--gold), #d4b872);
+            color: var(--navy);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(197, 165, 90, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .map-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(197, 165, 90, 0.6);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid var(--navy);
+            color: var(--navy);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        /* Timeline */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30px;
+            width: 2px;
+            background: var(--gold);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 70px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 21px;
+            top: 15px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--vermillion);
+            border: 4px solid var(--warm-gray);
+            z-index: 1;
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+        }
+
+        .time {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--vermillion);
+        }
+
+        .transport {
+            font-size: 0.9rem;
+            color: var(--navy);
+            background: rgba(197, 165, 90, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .card-note {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Sections */
+        .section {
+            margin-top: 60px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--vermillion);
+        }
+
+        /* Tide Chart */
+        .tide-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .tide-info { grid-template-columns: 1fr; }
+        }
+        .tide-day {
+            background: var(--warm-gray);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .tide-day h4 { margin-bottom: 10px; color: var(--navy); }
+        .tide-list { list-style: none; }
+        .tide-list li { margin-bottom: 5px; font-size: 0.9rem; }
+        .tide-list .high { color: var(--vermillion); font-weight: bold; }
+        .tide-list .low { color: #0077b6; font-weight: bold; }
+
+        /* Ferry Timetable */
+        .timetable-wrapper {
+            margin-bottom: 20px;
+        }
+        .timetable-wrapper h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        .timetable th, .timetable td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .timetable th {
+            background-color: var(--navy);
+            color: var(--white);
+            font-weight: 400;
+        }
+        .ferry-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: var(--warm-gray);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--navy);
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e8e5df;
+        }
+
+        .accordion-content {
+            background: var(--white);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-inner {
+            padding: 20px;
+            font-size: 0.9rem;
+            display: grid;
+            gap: 10px;
+        }
+
+        .accordion-inner p strong {
+            color: var(--navy);
+            display: inline-block;
+            width: 80px;
+        }
+
+        .accordion-inner a {
+            color: var(--vermillion);
+            text-decoration: none;
+        }
+
+        .accordion-inner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { padding-left: 50px; }
+            .timeline-marker { left: 11px; }
+            .card-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="content">
+            <h1>広島・呉・宮島 2日間の旅</h1>
+            <p>2026年8月23日(日) 〜 8月24日(月)</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="map-btn-container">
+            <a href="map.html" class="map-btn"><i class="fa-solid fa-map-location-dot"></i> 地図で旅を体験する</a>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('day1')">Day 1 (8/23)</button>
+            <button class="tab-btn" onclick="openTab('day2')">Day 2 (8/24)</button>
+        </div>
+
+        <!-- Day 1 Content -->
+        <div id="day1" class="tab-content active">
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">06:16</span>
+                            <span class="transport">🚆 電車（210円）</span>
+                        </div>
+                        <h3 class="card-title serif">JR蟹江駅 出発</h3>
+                        <p class="card-note">JR関西本線 名古屋行<br>2番線発→13番線着</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">06:28 - 07:06</span>
+                            <span class="transport">🚅 新幹線</span>
+                        </div>
+                        <h3 class="card-title serif">JR名古屋駅 乗り換え</h3>
+                        <p class="card-note">乗りかえ38分<br>07:06発 のぞみ103号 13号車10ABCDE（禁煙指定席）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">09:17</span>
+                            <span class="transport">🚶 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">JR広島駅 到着</h3>
+                        <p class="card-note">新幹線改札口へ</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">09:30</span>
+                            <span class="transport">🚕 タクシー</span>
+                        </div>
+                        <h3 class="card-title serif">広交タクシー乗務員と合流</h3>
+                        <p class="card-note">貸切 9:30〜16:30（71,400円）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">10:00 - 11:15</span>
+                            <span class="transport">🍽️ 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">幟町八昌 ランチ</h3>
+                        <p class="card-note">09:40到着。10:00開店まで待機。<br>広島屈指の名店でお好み焼き。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">11:15 - 11:55</span>
+                            <span class="transport">🚕 タクシー</span>
+                        </div>
+                        <h3 class="card-title serif">呉市へ移動</h3>
+                        <p class="card-note">クレアライン経由（約40分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">11:55 - 12:45</span>
+                            <span class="transport">🏛️ 徒歩見学</span>
+                        </div>
+                        <h3 class="card-title serif">大和ミュージアム</h3>
+                        <p class="card-note">2026年4月リニューアルオープン（約50分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">12:45 - 13:30</span>
+                            <span class="transport">⚓ 徒歩見学</span>
+                        </div>
+                        <h3 class="card-title serif">てつのくじら館</h3>
+                        <p class="card-note">実物潜水艦「あきしお」内部見学（約45分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">13:30 - 14:35</span>
+                            <span class="transport">🚢 クルーズ船</span>
+                        </div>
+                        <h3 class="card-title serif">呉湾艦船めぐり</h3>
+                        <p class="card-note">13:30 呉中央桟橋ターミナル受付（徒歩約2分）<br>14:00〜14:35 クルーズ（大人2,200円）<br>潜水艦・護衛艦鑑賞</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">14:40 - 15:40</span>
+                            <span class="transport">🚕 タクシー</span>
+                        </div>
+                        <h3 class="card-title serif">宮島口へ移動</h3>
+                        <p class="card-note">呉IC〜広島呉道路経由（約60分）<br>15:40到着。タクシー返却（16:30枠に対し50分のゆとり）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">16:10 - 16:20</span>
+                            <span class="transport">⛴️ フェリー</span>
+                        </div>
+                        <h3 class="card-title serif">宮島口港発 → 宮島港</h3>
+                        <p class="card-note">JR宮島フェリー16:10発「大鳥居便」<br>約10分の船旅で宮島到着</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">16:35</span>
+                            <span class="transport">🧳 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">宮島ホテルまこと チェックイン</h3>
+                        <p class="card-note">徒歩5〜7分。荷物預け・一息。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">16:50 - 18:00</span>
+                            <span class="transport">⛩️ 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">厳島神社 夕刻参拝</h3>
+                        <p class="card-note">閉門18:00まで1時間10分のゆとり。<br>満潮 16:32（143cm）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">19:00</span>
+                            <span class="transport">🍱 旅館内</span>
+                        </div>
+                        <h3 class="card-title serif">ホテルにて夕食</h3>
+                        <p class="card-note">A5ランク広島牛 料理長おまかせ会席</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Day 2 Content -->
+        <div id="day2" class="tab-content">
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">08:00</span>
+                            <span class="transport">🍳 旅館内</span>
+                        </div>
+                        <h3 class="card-title serif">朝食・チェックアウト</h3>
+                        <p class="card-note">荷物をフロントに預ける</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">09:00 - 10:15</span>
+                            <span class="transport">⛩️ 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">厳島神社参拝＆大鳥居干潮散策</h3>
+                        <p class="card-note">干潮 09:29（48cm）大鳥居足元まで歩ける</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">10:15 - 11:15</span>
+                            <span class="transport">🚌 バス/徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">大聖院参拝</h3>
+                        <p class="card-note">メイプルライナー利用「大聖院前」まで</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">11:15 - 12:00</span>
+                            <span class="transport">🍁 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">宮島表参道商店街 散策</h3>
+                        <p class="card-note">もみじ饅頭・食べ歩き・お土産</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">12:00 - 12:20</span>
+                            <span class="transport">🚶 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">宮島港へ移動</h3>
+                        <p class="card-note">乗船手続き（アクアネット広島 世界遺産航路）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">12:40 - 13:25</span>
+                            <span class="transport">🚤 高速船</span>
+                        </div>
+                        <h3 class="card-title serif">ひろしま世界遺産航路</h3>
+                        <p class="card-note">宮島発 → 平和公園着（約45分, 大人2,400円）<br>元安川桟橋到着</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">13:25 - 13:45</span>
+                            <span class="transport">🧳 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">手荷物預け＆休憩</h3>
+                        <p class="card-note">おりづるタワー1Fロッカー or 資料館地下1Fロッカー（徒歩約3分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">13:45 - 15:15</span>
+                            <span class="transport">🕊️ 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">平和記念公園＆資料館見学</h3>
+                        <p class="card-note">事前WEB予約推奨（約1時間30分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">15:15 - 16:20</span>
+                            <span class="transport">🏢 徒歩</span>
+                        </div>
+                        <h3 class="card-title serif">おりづるタワー</h3>
+                        <p class="card-note">荷物ピックアップ＆展望フロア（徒歩約3分）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">16:30 - 17:00</span>
+                            <span class="transport">🚕 タクシー</span>
+                        </div>
+                        <h3 class="card-title serif">広島駅へ移動・到着</h3>
+                        <p class="card-note">おりづるタワー前から移動（約15分）。<br>駅ビルekieでお土産・駅弁。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">18:18</span>
+                            <span class="transport">🚅 新幹線</span>
+                        </div>
+                        <h3 class="card-title serif">JR広島駅 出発</h3>
+                        <p class="card-note">のぞみ54号 13号車08ABCDE（禁煙指定席）</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="time">20:34</span>
+                            <span class="transport">🚆 電車</span>
+                        </div>
+                        <h3 class="card-title serif">JR名古屋駅 到着</h3>
+                        <p class="card-note">JR関西本線へ乗りかえ</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tide Chart Section -->
+        <section class="section">
+            <h2 class="section-title serif">潮位表（宮島）</h2>
+            <div class="tide-info">
+                <div class="tide-day">
+                    <h4 class="serif">8月23日 (日)</h4>
+                    <ul class="tide-list">
+                        <li><span class="low">干潮</span> 08:28 (58cm)</li>
+                        <li><span class="high">満潮</span> 16:32 (143cm) ★夕刻参拝時</li>
+                        <li><span class="low">干潮</span> 21:53 (118cm)</li>
+                    </ul>
+                </div>
+                <div class="tide-day">
+                    <h4 class="serif">8月24日 (月)</h4>
+                    <ul class="tide-list">
+                        <li><span class="high">満潮</span> 02:07 (128cm)</li>
+                        <li><span class="low">干潮</span> 09:29 (48cm) ★大鳥居散策可能</li>
+                        <li><span class="high">満潮</span> 16:55 (151cm)</li>
+                        <li><span class="low">干潮</span> 22:25 (109cm)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ferry Timetable Section -->
+        <section class="section">
+            <h2 class="section-title serif">フェリー時刻表</h2>
+            
+            <div class="timetable-wrapper">
+                <h4 class="serif">宮島口港 → 宮島港（行き）</h4>
+                <p class="ferry-note">所要時間: 約10分 / 大人片道200円 + 宮島訪問税100円</p>
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>時間帯</th>
+                            <th>JR西日本宮島フェリー<br><small>(9:10〜16:10は大鳥居便)</small></th>
+                            <th>宮島松大汽船</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>16時台</td>
+                            <td><strong>16:10 (大鳥居便★)</strong>, 16:25, 16:40, 16:55</td>
+                            <td>16:00, 16:15, 16:30, 16:45</td>
+                        </tr>
+                        <tr>
+                            <td>17時台</td>
+                            <td>17:10, 17:25, 17:40, 17:55</td>
+                            <td>17:00, 17:15, 17:30, 17:45</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="timetable-wrapper">
+                <h4 class="serif">ひろしま世界遺産航路（アクアネット広島）</h4>
+                <p class="ferry-note">要事前WEB予約 / 所要時間: 約45分 / 大人2,400円</p>
+                <table class="timetable">
+                    <thead>
+                        <tr>
+                            <th>出発</th>
+                            <th>時間</th>
+                            <th>到着</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>宮島発</td>
+                            <td>12:40</td>
+                            <td>平和公園着 (13:25)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: right; font-size: 0.85rem;"><a href="https://www.aqua-net-h.co.jp/" target="_blank" style="color: var(--vermillion);">公式予約サイトはこちら</a></p>
+            </div>
+        </section>
+
+        <!-- Facility Details Section -->
+        <section class="section">
+            <h2 class="section-title serif">施設詳細・連絡先</h2>
+            <div class="accordion">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <h3 class="serif" style="margin-bottom: 10px;">広島・呉・宮島 2日間の旅</h3>
+        <p>2026.08.23 - 08.24</p>
+    </footer>
+
+    <script>
+        // Tab Switching Logic
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Facility Data
+        const facilities = [
+            { name: "幟町八昌", address: "広島県広島市中区幟町14-17", phone: "082-224-4577", website: "https://okonomiyaki.or.jp/", note: "お好み焼き" },
+            { name: "大和ミュージアム", address: "広島県呉市宝町5-20", phone: "0823-25-3017", website: "https://yamato-museum.com/", note: "呉市海事歴史科学館" },
+            { name: "てつのくじら館", address: "広島県呉市宝町5-32", phone: "0823-21-6111", website: "https://www.jmsdf-kure-museum.go.jp/", note: "海上自衛隊呉史料館" },
+            { name: "呉湾艦船めぐり", address: "広島県呉市宝町1-9 呉中央桟橋1F", phone: "0823-21-1400", website: "https://bunker-supply.com/blog/kansen/", note: "バンカー・サプライ" },
+            { name: "昴珈琲店 本店", address: "広島県呉市中通2-5-3", phone: "0823-21-4439", website: "https://www.subarucoffee.co.jp/", note: "海軍さんの珈琲" },
+            { name: "福住フライケーキ", address: "広島県呉市中通4-12-20", phone: "0823-25-4841", website: "https://www.kure-kankou.jp/", note: "フライケーキ" },
+            { name: "アレイからすこじま", address: "広島県呉市昭和町14", phone: "0823-25-3309", website: "https://www.kure-kankou.jp/", note: "潜水艦・護衛艦" },
+            { name: "音戸の瀬戸・音戸大橋", address: "広島県呉市警固屋8丁目", phone: "0823-25-3309", website: "https://www.kure-kankou.jp/", note: "ループ橋" },
+            { name: "広交タクシー", address: "広島県広島市西区三篠町3-14-17", phone: "082-294-8700", website: "https://www.hiroko-group.co.jp/taxi/", note: "1日目貸切" },
+            { name: "宮島フェリー（JR/松大）", address: "広島県廿日市市宮島口1-11-5", phone: "0829-56-2045", website: "https://jr-miyajimaferry.co.jp/", note: "JRフェリー" },
+            { name: "宮島ホテルまこと", address: "広島県廿日市市宮島町755", phone: "0829-44-0070", website: "http://hotelmakoto.co.jp/", note: "宿泊先" },
+            { name: "厳島神社", address: "広島県廿日市市宮島町1-1", phone: "0829-44-0206", website: "http://www.itsukushimajinja.jp/", note: "世界遺産" },
+            { name: "大聖院", address: "広島県廿日市市宮島町216", phone: "0829-44-0161", website: "https://daishoin.or.jp/", note: "宮島最古の寺院" },
+            { name: "メイプルライナー", address: "宮島島内", phone: "0829-44-0300", website: "https://www.miyajima.or.jp/", note: "島内乗合バス" },
+            { name: "アクアネット広島", address: "広島県広島市中区大手町1-9-1", phone: "082-240-5955", website: "https://www.aqua-net-h.co.jp/", note: "世界遺産航路" },
+            { name: "広島平和記念資料館", address: "広島県広島市中区中島町1-2", phone: "082-242-7777", website: "https://hpmmuseum.jp/", note: "平和記念公園" },
+            { name: "おりづるタワー", address: "広島県広島市中区大手町1-2-1", phone: "082-569-6803", website: "https://www.orizurutower.jp/", note: "展望フロア" }
+        ];
+
+        // Populate Accordion
+        const accordionContainer = document.querySelector('.accordion');
+        
+        facilities.forEach((facility, index) => {
+            const item = document.createElement('div');
+            item.className = 'accordion-item';
+            
+            const header = document.createElement('div');
+            header.className = 'accordion-header';
+            header.innerHTML = `<span>${facility.name}</span> <i class="fa-solid fa-chevron-down"></i>`;
+            
+            const content = document.createElement('div');
+            content.className = 'accordion-content';
+            content.innerHTML = `
+                <div class="accordion-inner">
+                    <p><strong>備考:</strong> ${facility.note}</p>
+                    <p><strong>住所:</strong> ${facility.address}</p>
+                    <p><strong>電話:</strong> <a href="tel:${facility.phone.replace(/-/g, '')}">${facility.phone}</a></p>
+                    <p><strong>WEB:</strong> <a href="${facility.website}" target="_blank" rel="noopener noreferrer">公式サイトへ <i class="fa-solid fa-external-link-alt" style="font-size: 0.8em;"></i></a></p>
+                </div>
+            `;
+            
+            header.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const isOpen = content.style.maxHeight;
+                
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                document.querySelectorAll('.accordion-header i').forEach(el => {
+                    el.classList.remove('fa-chevron-up');
+                    el.classList.add('fa-chevron-down');
+                });
+                
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+            
+            item.appendChild(header);
+            item.appendChild(content);
+            accordionContainer.appendChild(item);
+        });
+    </script>
+</body>
+</html>
