@@ -347,30 +347,40 @@
         }
 
         .legend-close-btn {
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            color: #888;
+            background: rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
+            font-size: 1.2rem;
+            color: #555;
             cursor: pointer;
-            padding: 0 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             line-height: 1;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
         }
 
-        .legend-close-btn:hover {
-            color: var(--accent);
+        .legend-close-btn:active, .legend-close-btn:hover {
+            color: white;
+            background: var(--accent);
+            border-color: var(--accent);
         }
 
         .legend-toggle-btn {
             background: white;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            font-size: 0.85rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+            font-size: 0.9rem;
             font-weight: bold;
             color: var(--primary);
             cursor: pointer;
-            border: 1px solid var(--gold);
+            border: 2px solid var(--gold);
             display: none;
+            touch-action: manipulation;
         }
 
         /* Mobile Height Control Bar */
@@ -773,30 +783,51 @@
 
         // Add Legend Control with Close Button
         const legend = L.control({ position: 'bottomright' });
-        legend.onAdd = function() {
+        legend.onAdd = function(mapInstance) {
             const div = L.DomUtil.create('div', 'map-legend');
             div.id = 'mapLegend';
             div.innerHTML = `
                 <div class="legend-header">
                     <span>移動手段</span>
-                    <button class="legend-close-btn" onclick="toggleLegend(false)" title="閉じる">×</button>
+                    <button class="legend-close-btn" id="btnCloseLegend" title="閉じる">×</button>
                 </div>
                 <div class="legend-item"><span class="legend-line line-train"></span> 電車 / 新幹線</div>
                 <div class="legend-item"><span class="legend-line line-taxi"></span> タクシー</div>
                 <div class="legend-item"><span class="legend-line line-ferry"></span> フェリー / 高速船</div>
                 <div class="legend-item"><span class="legend-line line-walk"></span> 徒歩</div>
             `;
+            
+            // Prevent map click/touch propagation
+            L.DomEvent.disableClickPropagation(div);
+            L.DomEvent.disableScrollPropagation(div);
+            
+            const closeBtn = div.querySelector('#btnCloseLegend');
+            L.DomEvent.on(closeBtn, 'click touchend', function(e) {
+                L.DomEvent.stopPropagation(e);
+                L.DomEvent.preventDefault(e);
+                toggleLegend(false);
+            });
+
             return div;
         };
         legend.addTo(map);
 
         // Add Legend Open Toggle Button
         const legendToggle = L.control({ position: 'bottomright' });
-        legendToggle.onAdd = function() {
+        legendToggle.onAdd = function(mapInstance) {
             const btn = L.DomUtil.create('button', 'legend-toggle-btn');
             btn.id = 'legendToggleBtn';
             btn.innerHTML = '🗺️ 凡例';
-            btn.onclick = function() { toggleLegend(true); };
+            
+            L.DomEvent.disableClickPropagation(btn);
+            L.DomEvent.disableScrollPropagation(btn);
+            
+            L.DomEvent.on(btn, 'click touchend', function(e) {
+                L.DomEvent.stopPropagation(e);
+                L.DomEvent.preventDefault(e);
+                toggleLegend(true);
+            });
+
             return btn;
         };
         legendToggle.addTo(map);
@@ -805,11 +836,11 @@
             const legendEl = document.getElementById('mapLegend');
             const toggleBtn = document.getElementById('legendToggleBtn');
             if (show) {
-                legendEl.style.display = 'block';
-                toggleBtn.style.display = 'none';
+                if (legendEl) legendEl.style.display = 'block';
+                if (toggleBtn) toggleBtn.style.display = 'none';
             } else {
-                legendEl.style.display = 'none';
-                toggleBtn.style.display = 'block';
+                if (legendEl) legendEl.style.display = 'none';
+                if (toggleBtn) toggleBtn.style.display = 'block';
             }
         }
 
