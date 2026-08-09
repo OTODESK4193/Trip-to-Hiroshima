@@ -73,7 +73,7 @@
             justify-content: center;
             text-align: center;
             color: var(--white);
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Itsukushima_Shrine_torii_gate%3B_2014.jpg/640px-Itsukushima_Shrine_torii_gate%3B_2014.jpg');
+            background-image: url('images/itsukushima_high.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -84,7 +84,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(27,42,74,0.85) 0%, rgba(199,62,58,0.7) 100%);
+            background: linear-gradient(135deg, rgba(27,42,74,0.82) 0%, rgba(199,62,58,0.65) 100%);
             z-index: 1;
         }
 
@@ -98,24 +98,17 @@
         header h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-weight: 900;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
         }
 
         header p {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            color: var(--gold);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.95;
             font-weight: 500;
-            letter-spacing: 1px;
-            background: rgba(0,0,0,0.3);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
         }
 
-        /* Wave Divider */
         .wave-divider {
             position: absolute;
             bottom: 0;
@@ -123,14 +116,16 @@
             width: 100%;
             overflow: hidden;
             line-height: 0;
-            z-index: 3;
+            z-index: 2;
         }
+
         .wave-divider svg {
             position: relative;
             display: block;
             width: calc(100% + 1.3px);
-            height: 50px;
+            height: 40px;
         }
+
         .wave-divider .shape-fill {
             fill: var(--warm-gray);
         }
@@ -139,40 +134,31 @@
         main {
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
         }
 
-        /* Map Button */
+        /* Map Experience Button */
         .map-btn-container {
             text-align: center;
-            margin: -30px 0 40px;
-            position: relative;
-            z-index: 10;
+            margin-bottom: 30px;
         }
 
         .map-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, var(--gold), #d4b872);
+            background: linear-gradient(135deg, var(--gold) 0%, #D4AF37 100%);
             color: var(--navy);
-            padding: 16px 35px;
-            border-radius: 40px;
-            text-decoration: none;
             font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
             font-size: 1.1rem;
-            box-shadow: 0 10px 25px rgba(197, 165, 90, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .map-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(197, 165, 90, 0.5);
-        }
-
-        /* Section Titles */
-        .section-title {
-            color: var(--navy);
             font-size: 1.8rem;
             margin: 40px 0 25px;
             text-align: center;
@@ -326,6 +312,18 @@
             position: relative;
         }
 
+        .card-thumb {
+            position: absolute;
+            top: 45px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
         .card-time {
             font-size: 1.1rem;
             font-weight: 700;
@@ -340,7 +338,7 @@
             font-size: 1.25rem;
             color: var(--navy);
             font-weight: 700;
-            padding-right: 60px; /* Space for badge */
+            padding-right: 90px; /* Space for badge and thumb */
             margin-top: 5px;
         }
 
@@ -747,12 +745,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 06:28 - 07:06</span>
                             <h3 class="card-title serif">JR名古屋駅 乗り換え</h3>
                             <span class="transport-icon">🚅 新幹線</span>
+                            <img src="images/shinkansen.jpg" class="card-thumb" alt="新幹線">
                             <div class="card-tap-hint">タップで写真・詳細表示 ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/JR_Central_Shinkansen_N700S.jpg/640px-JR_Central_Shinkansen_N700S.jpg" alt="新幹線" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/shinkansen.jpg" alt="新幹線" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     乗りかえ38分<br>
                                     07:06発 のぞみ103号 13号車10ABCDE（禁煙指定席）
@@ -813,12 +812,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 10:00 - 11:15</span>
                             <h3 class="card-title serif">幟町八昌 ランチ</h3>
                             <span class="transport-icon">🍽️ 徒歩</span>
+                            <img src="images/okonomiyaki.jpg" class="card-thumb" alt="お好み焼き">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Okonomiyaki_by_S_e_i_in_Hiroshima.jpg/640px-Okonomiyaki_by_S_e_i_in_Hiroshima.jpg" alt="お好み焼き" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/okonomiyaki.jpg" alt="お好み焼き" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     09:40到着。10:00開店まで待機。<br>
                                     広島屈指の名店で絶品お好み焼きを堪能。
@@ -856,12 +856,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 11:55 - 12:45</span>
                             <h3 class="card-title serif">大和ミュージアム</h3>
                             <span class="transport-icon">🏛️ 徒歩見学</span>
+                            <img src="images/yamato_museum.jpg" class="card-thumb" alt="大和ミュージアム">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Yamato_Museum_Interior.jpg/640px-Yamato_Museum_Interior.jpg" alt="大和ミュージアム" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/yamato_museum.jpg" alt="大和ミュージアム" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     2026年4月リニューアルオープン。（見学約50分）<br>
                                     1/10スケールの戦艦「大和」は圧巻。
@@ -880,12 +881,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 12:45 - 13:30</span>
                             <h3 class="card-title serif">てつのくじら館</h3>
                             <span class="transport-icon">⚓ 徒歩見学</span>
+                            <img src="images/submarine.jpg" class="card-thumb" alt="てつのくじら館">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/JMSDF_Kure_Museum.jpg/640px-JMSDF_Kure_Museum.jpg" alt="てつのくじら館" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/submarine.jpg" alt="てつのくじら館" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     実物潜水艦「あきしお」の内部を見学（約45分）。
                                 </div>
@@ -903,12 +905,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 13:30 - 14:35</span>
                             <h3 class="card-title serif">呉湾艦船めぐり</h3>
                             <span class="transport-icon">🚢 クルーズ船</span>
+                            <img src="images/kansen_meguri.jpg" class="card-thumb" alt="呉湾艦船めぐり">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/JS_Sōryū_in_Kure%2C_-16_Oct._2016_a.jpg/640px-JS_Sōryū_in_Kure%2C_-16_Oct._2016_a.jpg" alt="呉湾艦船めぐり" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/kansen_meguri.jpg" alt="呉湾艦船めぐり" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     13:30 呉中央桟橋ターミナル受付（徒歩約2分）<br>
                                     14:00〜14:35 クルーズ（大人2,200円）<br>
@@ -950,12 +953,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 16:10 - 16:20</span>
                             <h3 class="card-title serif">宮島口港発 → 宮島港</h3>
                             <span class="transport-icon">⛴️ フェリー</span>
+                            <img src="images/miyajima_ferry.jpg" class="card-thumb" alt="JR宮島フェリー">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/JR_Miyajima_ferry_Nanatsurai.jpg/640px-JR_Miyajima_ferry_Nanatsurai.jpg" alt="JR宮島フェリー" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/miyajima_ferry.jpg" alt="JR宮島フェリー" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     JR宮島フェリー 16:10発「大鳥居便」に乗船。<br>
                                     海から大鳥居に接近する約10分の船旅。
@@ -996,12 +1000,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 16:50 - 18:00</span>
                             <h3 class="card-title serif">厳島神社 夕刻参拝</h3>
                             <span class="transport-icon">⛩️ 徒歩</span>
+                            <img src="images/itsukushima_high.jpg" class="card-thumb" alt="厳島神社 満潮">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Itsukushima_Shrine_torii_gate%3B_2014.jpg/640px-Itsukushima_Shrine_torii_gate%3B_2014.jpg" alt="厳島神社 満潮" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/itsukushima_high.jpg" alt="厳島神社 満潮" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     閉門18:00まで1時間10分のゆとり。<br>
                                     ★満潮 16:32（143cm）海に浮かぶ美しい社殿を鑑賞。
@@ -1072,12 +1077,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 09:00 - 10:15</span>
                             <h3 class="card-title serif">大鳥居 干潮散策</h3>
                             <span class="transport-icon">⛩️ 徒歩</span>
+                            <img src="images/itsukushima_low.jpg" class="card-thumb" alt="厳島神社 干潮">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/20181111_Itsukushima_Shrine_torii-1.jpg/640px-20181111_Itsukushima_Shrine_torii-1.jpg" alt="厳島神社 干潮" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/itsukushima_low.jpg" alt="厳島神社 干潮" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     ★干潮 09:29（48cm）<br>
                                     潮が引いて大鳥居の足元まで歩いて行ける貴重な体験。
@@ -1096,12 +1102,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 10:15 - 11:15</span>
                             <h3 class="card-title serif">大聖院 参拝</h3>
                             <span class="transport-icon">🚌 バス/徒歩</span>
+                            <img src="images/daishoin.jpg" class="card-thumb" alt="大聖院">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Daisho-in_Miyajima-cho%2C_Hatsukaichi-shi%2C_Hiroshima-ken%2C_Japan_-_panoramio.jpg/640px-Daisho-in_Miyajima-cho%2C_Hatsukaichi-shi%2C_Hiroshima-ken%2C_Japan_-_panoramio.jpg" alt="大聖院" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/daishoin.jpg" alt="大聖院" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     メイプルライナー利用「大聖院前」まで。<br>
                                     宮島最古の歴史を持つ寺院。
@@ -1120,12 +1127,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 11:15 - 12:00</span>
                             <h3 class="card-title serif">表参道商店街 散策</h3>
                             <span class="transport-icon">🍁 徒歩</span>
+                            <img src="images/miyajima_street.jpg" class="card-thumb" alt="宮島表参道商店街">
                             <div class="card-tap-hint">タップで写真・公式案内 ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Miyajima_shopping_street.jpg/640px-Miyajima_shopping_street.jpg" alt="宮島表参道商店街" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/miyajima_street.jpg" alt="宮島表参道商店街" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     もみじ饅頭・焼き牡蠣などの食べ歩きやお土産探し。
                                 </div>
@@ -1209,12 +1217,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 13:45 - 15:15</span>
                             <h3 class="card-title serif">平和記念公園・資料館</h3>
                             <span class="transport-icon">🕊️ 徒歩</span>
+                            <img src="images/atomic_dome.jpg" class="card-thumb" alt="原爆ドーム">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Genbaku_Dome_04.jpg/640px-Genbaku_Dome_04.jpg" alt="原爆ドーム" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/atomic_dome.jpg" alt="原爆ドーム" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     事前WEB予約推奨（見学約1時間30分）。原爆ドームも合わせて見学。
                                 </div>
@@ -1232,12 +1241,13 @@
                             <span class="card-time"><i class="fa-regular fa-clock"></i> 15:15 - 16:20</span>
                             <h3 class="card-title serif">おりづるタワー</h3>
                             <span class="transport-icon">🏢 徒歩</span>
+                            <img src="images/orizuru_tower.jpg" class="card-thumb" alt="おりづるタワー">
                             <div class="card-tap-hint">タップで写真・公式HP ▼</div>
                             <i class="fa-solid fa-chevron-down expand-icon"></i>
                         </div>
                         <div class="card-body">
                             <div class="card-body-inner">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Hiroshima_Orizuru_Tower_2022-2.jpg/640px-Hiroshima_Orizuru_Tower_2022-2.jpg" alt="おりづるタワー" class="card-photo" loading="lazy" referrerpolicy="no-referrer">
+                                <img src="images/orizuru_tower.jpg" alt="おりづるタワー" class="card-photo" loading="lazy">
                                 <div class="card-note">
                                     荷物ピックアップ後、展望フロアへ。<br>
                                     広島市街と平和公園を一望。
