@@ -548,21 +548,6 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add Legend
-        const legend = L.control({position: 'bottomright'});
-        legend.onAdd = function (map) {
-            const div = L.DomUtil.create('div', 'map-legend');
-            div.innerHTML = `
-                <div style="font-weight:bold; margin-bottom:5px;">移動手段</div>
-                <div class="legend-item"><span class="legend-line line-train"></span>電車・新幹線</div>
-                <div class="legend-item"><span class="legend-line line-taxi"></span>タクシー</div>
-                <div class="legend-item"><span class="legend-line line-walk"></span>徒歩</div>
-                <div class="legend-item"><span class="legend-line line-ferry"></span>船・フェリー</div>
-            `;
-            return div;
-        };
-        legend.addTo(map);
-
         // Store markers and polylines
         const markers = {};
         const polylines = [];
