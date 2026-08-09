@@ -868,9 +868,17 @@
 <div class="card-body">
 <div class="card-body-inner">
 <div class="card-note">
+                                    <span style="display:inline-block; background:#27AE60; color:white; font-weight:bold; padding:2px 10px; border-radius:12px; font-size:0.8rem; margin-bottom:6px;">✅【予約完了】14:00発便</span><br/>
                                     13:30 呉中央桟橋ターミナル受付（徒歩約2分）<br/>
                                     14:00〜14:35 クルーズ（大人2,200円）<br/>
                                     大迫力の潜水艦・護衛艦を海から鑑賞。
+                                </div>
+                                <div style="background: linear-gradient(135deg, #1B2A4A 0%, #2A4373 100%); color: white; padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(27,42,74,0.15); cursor: pointer;" onclick="event.stopPropagation(); copyReservationNo('117PACCF2')">
+                                    <div>
+                                        <div style="font-size: 0.75rem; color: #C5A55A; font-weight: bold;">🎫 呉湾艦船めぐり 予約番号</div>
+                                        <div style="font-size: 1.25rem; font-weight: 900; letter-spacing: 1.5px; font-family: monospace;">117PACCF2</div>
+                                    </div>
+                                    <button style="background: #C5A55A; color: #1B2A4A; border: none; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer;"><i class="fa-regular fa-copy"></i> コピー</button>
                                 </div>
 <a class="site-link-btn" href="https://bunker-supply.com/blog/kansen/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-ship"></i> 呉湾艦船めぐり 公式サイト・予約 ↗</a>
 </div>
@@ -1280,6 +1288,19 @@
         
         // Initial reveal
         setTimeout(revealItems, 300);
+
+        // Copy Reservation Number Helper
+        function copyReservationNo(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('予約番号【 ' + text + ' 】をクリップボードにコピーしました！');
+                }).catch(() => {
+                    alert('予約番号: ' + text);
+                });
+            } else {
+                alert('予約番号: ' + text);
+            }
+        }
 
         // Timeline Card Accordion
         function toggleCard(element, event) {
