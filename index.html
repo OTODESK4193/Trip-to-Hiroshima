@@ -1,17 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>広島・呉・宮島 2日間の旅</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>広島・呉・宮島 2日間の旅</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Serif+JP:wght@400;600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
         :root {
             --vermillion: #C73E3A;
             --navy: #1B2A4A;
@@ -305,27 +304,39 @@
         .badge.transport { background: var(--cat-transport); }
 
         .card-header {
-            padding: 20px;
+            padding: 18px 20px;
             display: flex;
-            flex-direction: column;
-            gap: 5px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
             position: relative;
         }
 
+        .card-header-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .card-header-media {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+            margin-right: 40px; /* Space for expand chevron */
+        }
+
         .card-thumb {
-            position: absolute;
-            top: 45px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
+            width: 55px;
+            height: 55px;
+            border-radius: 10px;
             object-fit: cover;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            z-index: 1;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.08);
+            position: static; /* Fixed absolute overlap issue */
         }
 
         .card-time {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--vermillion);
             font-family: 'Noto Sans JP', sans-serif;
@@ -335,11 +346,11 @@
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--navy);
             font-weight: 700;
-            padding-right: 90px; /* Space for badge and thumb */
-            margin-top: 5px;
+            padding-right: 0;
+            margin-top: 4px;
         }
 
         .transport-icon {
@@ -685,765 +696,556 @@
     </style>
 </head>
 <body>
-
-    <div id="progress-bar"></div>
-
-    <header>
-        <div class="content">
-            <h1>広島・呉・宮島<br>2日間の旅</h1>
-            <p><i class="fa-regular fa-calendar"></i> 2026.08.23 - 08.24</p>
-        </div>
-        <div class="wave-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.92,200.73,109.11,241.6,102.8,282.89,84.1,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </header>
-
-    <main>
-        <div class="map-btn-container">
-            <a href="map.html" class="map-btn"><i class="fa-solid fa-map-location-dot"></i> 地図で旅を体験する</a>
-        </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('day1')">Day 1 (8/23)</button>
-            <button class="tab-btn" onclick="switchTab('day2')">Day 2 (8/24)</button>
-        </div>
-
-        <!-- Day 1 Content -->
-        <div id="day1" class="tab-content active">
-            <h2 class="section-title serif" style="display: none;" id="day1-title">Day 1 (8/23)</h2>
-            <div class="timeline">
-                
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 06:16</span>
-                            <h3 class="card-title serif">JR蟹江駅 出発</h3>
-                            <span class="transport-icon">🚆 電車（210円）</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
-                                    <strong>JR関西本線 名古屋行</strong><br>
+<div id="progress-bar"></div>
+<header>
+<div class="content">
+<h1>広島・呉・宮島<br/>2日間の旅</h1>
+<p><i class="fa-regular fa-calendar"></i> 2026.08.23 - 08.24</p>
+</div>
+<div class="wave-divider">
+<svg data-name="Layer 1" preserveaspectratio="none" viewbox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+<path class="shape-fill" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.92,200.73,109.11,241.6,102.8,282.89,84.1,321.39,56.44Z"></path>
+</svg>
+</div>
+</header>
+<main>
+<div class="map-btn-container">
+<a class="map-btn" href="map.html"><i class="fa-solid fa-map-location-dot"></i> 地図で旅を体験する</a>
+</div>
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab('day1')">Day 1 (8/23)</button>
+<button class="tab-btn" onclick="switchTab('day2')">Day 2 (8/24)</button>
+</div>
+<!-- Day 1 Content -->
+<div class="tab-content active" id="day1">
+<h2 class="section-title serif" id="day1-title" style="display: none;">Day 1 (8/23)</h2>
+<div class="timeline">
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 06:16</span><h3 class="card-title serif">JR蟹江駅 出発</h3><span class="transport-icon">🚆 電車（210円）</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
+<strong>JR関西本線 名古屋行</strong><br/>
                                     2番線発 → 13番線着
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 06:28 - 07:06</span>
-                            <h3 class="card-title serif">JR名古屋駅 乗り換え</h3>
-                            <span class="transport-icon">🚅 新幹線</span>
-                            <img src="images/shinkansen.jpg" class="card-thumb" alt="新幹線">
-                            <div class="card-tap-hint">タップで写真・詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/shinkansen.jpg" alt="新幹線" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    乗りかえ38分<br>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 06:28 - 07:06</span><h3 class="card-title serif">JR名古屋駅 乗り換え</h3><span class="transport-icon">🚅 新幹線</span><div class="card-tap-hint">タップで写真・詳細表示 ▼</div></div><div class="card-header-media"><img alt="新幹線" class="card-thumb" src="images/shinkansen.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="新幹線" class="card-photo" loading="lazy" src="images/shinkansen.jpg"/>
+<div class="card-note">
+                                    乗りかえ38分<br/>
                                     07:06発 のぞみ103号 13号車10ABCDE（禁煙指定席）
                                 </div>
-                                <a href="https://jr-central.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-train"></i> JR東海 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 09:17</span>
-                            <h3 class="card-title serif">JR広島駅 到着</h3>
-                            <span class="transport-icon">🚶 徒歩</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">新幹線改札口へ</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 09:30</span>
-                            <h3 class="card-title serif">広交タクシー 乗車</h3>
-                            <span class="transport-icon">🚕 タクシー</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
-                                    貸切 9:30〜16:30（71,400円）<br>
+<a class="site-link-btn" href="https://jr-central.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-train"></i> JR東海 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 09:17</span><h3 class="card-title serif">JR広島駅 到着</h3><span class="transport-icon">🚶 徒歩</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">新幹線改札口へ</div>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 09:30</span><h3 class="card-title serif">広交タクシー 乗車</h3><span class="transport-icon">🚕 タクシー</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
+                                    貸切 9:30〜16:30（71,400円）<br/>
                                     乗務員と合流し出発。
                                 </div>
-                                <a href="https://www.hiroko-group.co.jp/taxi/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-taxi"></i> 広交タクシー 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge food">グルメ</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 10:00 - 11:15</span>
-                            <h3 class="card-title serif">幟町八昌 ランチ</h3>
-                            <span class="transport-icon">🍽️ 徒歩</span>
-                            <img src="images/okonomiyaki.jpg" class="card-thumb" alt="お好み焼き">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/okonomiyaki.jpg" alt="お好み焼き" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    09:40到着。10:00開店まで待機。<br>
+<a class="site-link-btn" href="https://www.hiroko-group.co.jp/taxi/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-taxi"></i> 広交タクシー 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge food">グルメ</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 10:00 - 11:15</span><h3 class="card-title serif">幟町八昌 ランチ</h3><span class="transport-icon">🍽️ 徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="お好み焼き" class="card-thumb" src="images/okonomiyaki.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="お好み焼き" class="card-photo" loading="lazy" src="images/okonomiyaki.jpg"/>
+<div class="card-note">
+                                    09:40到着。10:00開店まで待機。<br/>
                                     広島屈指の名店で絶品お好み焼きを堪能。
                                 </div>
-                                <a href="https://okonomiyaki.or.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-utensils"></i> 幟町八昌 店舗情報 ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 11:15 - 11:55</span>
-                            <h3 class="card-title serif">呉市へ移動</h3>
-                            <span class="transport-icon">🚕 タクシー</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">クレアライン経由（約40分）</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge museum">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 11:55 - 12:45</span>
-                            <h3 class="card-title serif">大和ミュージアム</h3>
-                            <span class="transport-icon">🏛️ 徒歩見学</span>
-                            <img src="images/yamato_museum.jpg" class="card-thumb" alt="大和ミュージアム">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/yamato_museum.jpg" alt="大和ミュージアム" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    2026年4月リニューアルオープン。（見学約50分）<br>
+<a class="site-link-btn" href="https://okonomiyaki.or.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-utensils"></i> 幟町八昌 店舗情報 ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 11:15 - 11:55</span><h3 class="card-title serif">呉市へ移動</h3><span class="transport-icon">🚕 タクシー</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">クレアライン経由（約40分）</div>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge museum">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 11:55 - 12:45</span><h3 class="card-title serif">大和ミュージアム</h3><span class="transport-icon">🏛️ 徒歩見学</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="大和ミュージアム" class="card-thumb" src="images/yamato_museum.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="大和ミュージアム" class="card-photo" loading="lazy" src="images/yamato_museum.jpg"/>
+<div class="card-note">
+                                    2026年4月リニューアルオープン。（見学約50分）<br/>
                                     1/10スケールの戦艦「大和」は圧巻。
                                 </div>
-                                <a href="https://yamato-museum.com/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-globe"></i> 大和ミュージアム 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge museum">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 12:45 - 13:30</span>
-                            <h3 class="card-title serif">てつのくじら館</h3>
-                            <span class="transport-icon">⚓ 徒歩見学</span>
-                            <img src="images/submarine.jpg" class="card-thumb" alt="てつのくじら館">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/submarine.jpg" alt="てつのくじら館" class="card-photo" loading="lazy">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://yamato-museum.com/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-globe"></i> 大和ミュージアム 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge museum">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 12:45 - 13:30</span><h3 class="card-title serif">てつのくじら館</h3><span class="transport-icon">⚓ 徒歩見学</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="てつのくじら館" class="card-thumb" src="images/submarine.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="てつのくじら館" class="card-photo" loading="lazy" src="images/submarine.jpg"/>
+<div class="card-note">
                                     実物潜水艦「あきしお」の内部を見学（約45分）。
                                 </div>
-                                <a href="https://www.jmsdf-kure-museum.go.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-globe"></i> てつのくじら館 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge nature">アクティビティ</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 13:30 - 14:35</span>
-                            <h3 class="card-title serif">呉湾艦船めぐり</h3>
-                            <span class="transport-icon">🚢 クルーズ船</span>
-                            <img src="images/kansen_meguri.jpg" class="card-thumb" alt="呉湾艦船めぐり">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/kansen_meguri.jpg" alt="呉湾艦船めぐり" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    13:30 呉中央桟橋ターミナル受付（徒歩約2分）<br>
-                                    14:00〜14:35 クルーズ（大人2,200円）<br>
+<a class="site-link-btn" href="https://www.jmsdf-kure-museum.go.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-globe"></i> てつのくじら館 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge nature">アクティビティ</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 13:30 - 14:35</span><h3 class="card-title serif">呉湾艦船めぐり</h3><span class="transport-icon">🚢 クルーズ船</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="呉湾艦船めぐり" class="card-thumb" src="images/kansen_meguri.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="呉湾艦船めぐり" class="card-photo" loading="lazy" src="images/kansen_meguri.jpg"/>
+<div class="card-note">
+                                    13:30 呉中央桟橋ターミナル受付（徒歩約2分）<br/>
+                                    14:00〜14:35 クルーズ（大人2,200円）<br/>
                                     大迫力の潜水艦・護衛艦を海から鑑賞。
                                 </div>
-                                <a href="https://bunker-supply.com/blog/kansen/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-ship"></i> 呉湾艦船めぐり 公式サイト・予約 ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 14:40 - 15:40</span>
-                            <h3 class="card-title serif">宮島口へ移動</h3>
-                            <span class="transport-icon">🚕 タクシー</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
-                                    呉IC〜広島呉道路経由（約60分）<br>
+<a class="site-link-btn" href="https://bunker-supply.com/blog/kansen/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-ship"></i> 呉湾艦船めぐり 公式サイト・予約 ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 14:40 - 15:40</span><h3 class="card-title serif">宮島口へ移動</h3><span class="transport-icon">🚕 タクシー</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
+                                    呉IC〜広島呉道路経由（約60分）<br/>
                                     15:40到着。タクシー返却（16:30枠に対し50分のゆとりあり）
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 16:10 - 16:20</span>
-                            <h3 class="card-title serif">宮島口港発 → 宮島港</h3>
-                            <span class="transport-icon">⛴️ フェリー</span>
-                            <img src="images/miyajima_ferry.jpg" class="card-thumb" alt="JR宮島フェリー">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/miyajima_ferry.jpg" alt="JR宮島フェリー" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    JR宮島フェリー 16:10発「大鳥居便」に乗船。<br>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 16:10 - 16:20</span><h3 class="card-title serif">宮島口港発 → 宮島港</h3><span class="transport-icon">⛴️ フェリー</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="JR宮島フェリー" class="card-thumb" src="images/miyajima_ferry.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="JR宮島フェリー" class="card-photo" loading="lazy" src="images/miyajima_ferry.jpg"/>
+<div class="card-note">
+                                    JR宮島フェリー 16:10発「大鳥居便」に乗船。<br/>
                                     海から大鳥居に接近する約10分の船旅。
                                 </div>
-                                <a href="https://jr-miyajimaferry.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-ferry"></i> JR西日本宮島フェリー 公式 ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 16:35</span>
-                            <h3 class="card-title serif">宮島ホテルまこと 到着</h3>
-                            <span class="transport-icon">🧳 徒歩</span>
-                            <div class="card-tap-hint">タップで詳細・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://jr-miyajimaferry.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-ferry"></i> JR西日本宮島フェリー 公式 ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 16:35</span><h3 class="card-title serif">宮島ホテルまこと 到着</h3><span class="transport-icon">🧳 徒歩</span><div class="card-tap-hint">タップで詳細・公式HP ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     港から徒歩5〜7分。荷物預け・チェックイン手続き。
                                 </div>
-                                <a href="http://hotelmakoto.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge shrine">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 16:50 - 18:00</span>
-                            <h3 class="card-title serif">厳島神社 夕刻参拝</h3>
-                            <span class="transport-icon">⛩️ 徒歩</span>
-                            <img src="images/itsukushima_high.jpg" class="card-thumb" alt="厳島神社 満潮">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/itsukushima_high.jpg" alt="厳島神社 満潮" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    閉門18:00まで1時間10分のゆとり。<br>
+<a class="site-link-btn" href="http://hotelmakoto.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge shrine">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 16:50 - 18:00</span><h3 class="card-title serif">厳島神社 夕刻参拝</h3><span class="transport-icon">⛩️ 徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="厳島神社 満潮" class="card-thumb" src="images/itsukushima_high.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="厳島神社 満潮" class="card-photo" loading="lazy" src="images/itsukushima_high.jpg"/>
+<div class="card-note">
+                                    閉門18:00まで1時間10分のゆとり。<br/>
                                     ★満潮 16:32（143cm）海に浮かぶ美しい社殿を鑑賞。
                                 </div>
-                                <a href="http://www.itsukushimajinja.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-torii-gate"></i> 厳島神社 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge food">グルメ</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 19:00</span>
-                            <h3 class="card-title serif">ホテルにて夕食</h3>
-                            <span class="transport-icon">🍱 旅館内</span>
-                            <div class="card-tap-hint">タップで詳細・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="http://www.itsukushimajinja.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-torii-gate"></i> 厳島神社 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge food">グルメ</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 19:00</span><h3 class="card-title serif">ホテルにて夕食</h3><span class="transport-icon">🍱 旅館内</span><div class="card-tap-hint">タップで詳細・公式HP ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     A5ランク広島牛 料理長おまかせ会席を満喫。
                                 </div>
-                                <a href="http://hotelmakoto.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Day 2 Content -->
-        <div id="day2" class="tab-content">
-            <h2 class="section-title serif" style="display: none;" id="day2-title">Day 2 (8/24)</h2>
-            <div class="timeline">
-                
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge food">グルメ</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 08:00</span>
-                            <h3 class="card-title serif">朝食・チェックアウト</h3>
-                            <span class="transport-icon">🍳 旅館内</span>
-                            <div class="card-tap-hint">タップで詳細・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="http://hotelmakoto.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Day 2 Content -->
+<div class="tab-content" id="day2">
+<h2 class="section-title serif" id="day2-title" style="display: none;">Day 2 (8/24)</h2>
+<div class="timeline">
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge food">グルメ</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 08:00</span><h3 class="card-title serif">朝食・チェックアウト</h3><span class="transport-icon">🍳 旅館内</span><div class="card-tap-hint">タップで詳細・公式HP ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     出発前に荷物をフロントに預ける。
                                 </div>
-                                <a href="http://hotelmakoto.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge shrine">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 09:00 - 10:15</span>
-                            <h3 class="card-title serif">大鳥居 干潮散策</h3>
-                            <span class="transport-icon">⛩️ 徒歩</span>
-                            <img src="images/itsukushima_low.jpg" class="card-thumb" alt="厳島神社 干潮">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/itsukushima_low.jpg" alt="厳島神社 干潮" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    ★干潮 09:29（48cm）<br>
+<a class="site-link-btn" href="http://hotelmakoto.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-hotel"></i> 宮島ホテルまこと 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge shrine">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 09:00 - 10:15</span><h3 class="card-title serif">大鳥居 干潮散策</h3><span class="transport-icon">⛩️ 徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="厳島神社 干潮" class="card-thumb" src="images/itsukushima_low.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="厳島神社 干潮" class="card-photo" loading="lazy" src="images/itsukushima_low.jpg"/>
+<div class="card-note">
+                                    ★干潮 09:29（48cm）<br/>
                                     潮が引いて大鳥居の足元まで歩いて行ける貴重な体験。
                                 </div>
-                                <a href="http://www.itsukushimajinja.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-torii-gate"></i> 厳島神社 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge shrine">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 10:15 - 11:15</span>
-                            <h3 class="card-title serif">大聖院 参拝</h3>
-                            <span class="transport-icon">🚌 バス/徒歩</span>
-                            <img src="images/daishoin.jpg" class="card-thumb" alt="大聖院">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/daishoin.jpg" alt="大聖院" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    メイプルライナー利用「大聖院前」まで。<br>
+<a class="site-link-btn" href="http://www.itsukushimajinja.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-torii-gate"></i> 厳島神社 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge shrine">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 10:15 - 11:15</span><h3 class="card-title serif">大聖院 参拝</h3><span class="transport-icon">🚌 バス/徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="大聖院" class="card-thumb" src="images/daishoin.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="大聖院" class="card-photo" loading="lazy" src="images/daishoin.jpg"/>
+<div class="card-note">
+                                    メイプルライナー利用「大聖院前」まで。<br/>
                                     宮島最古の歴史を持つ寺院。
                                 </div>
-                                <a href="https://daishoin.or.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-vihara"></i> 大聖院 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge food">グルメ</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 11:15 - 12:00</span>
-                            <h3 class="card-title serif">表参道商店街 散策</h3>
-                            <span class="transport-icon">🍁 徒歩</span>
-                            <img src="images/miyajima_street.jpg" class="card-thumb" alt="宮島表参道商店街">
-                            <div class="card-tap-hint">タップで写真・公式案内 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/miyajima_street.jpg" alt="宮島表参道商店街" class="card-photo" loading="lazy">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://daishoin.or.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-vihara"></i> 大聖院 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge food">グルメ</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 11:15 - 12:00</span><h3 class="card-title serif">表参道商店街 散策</h3><span class="transport-icon">🍁 徒歩</span><div class="card-tap-hint">タップで写真・公式案内 ▼</div></div><div class="card-header-media"><img alt="宮島表参道商店街" class="card-thumb" src="images/miyajima_street.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="宮島表参道商店街" class="card-photo" loading="lazy" src="images/miyajima_street.jpg"/>
+<div class="card-note">
                                     もみじ饅頭・焼き牡蠣などの食べ歩きやお土産探し。
                                 </div>
-                                <a href="https://www.miyajima.or.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-store"></i> 宮島観光協会 商店街案内 ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 12:00 - 12:20</span>
-                            <h3 class="card-title serif">宮島港へ移動</h3>
-                            <span class="transport-icon">🚶 徒歩</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://www.miyajima.or.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-store"></i> 宮島観光協会 商店街案内 ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 12:00 - 12:20</span><h3 class="card-title serif">宮島港へ移動</h3><span class="transport-icon">🚶 徒歩</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     アクアネット広島 世界遺産航路の乗船手続き。
                                 </div>
-                                <a href="https://www.aqua-net-h.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-ship"></i> 世界遺産航路 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 12:40 - 13:25</span>
-                            <h3 class="card-title serif">ひろしま世界遺産航路</h3>
-                            <span class="transport-icon">🚤 高速船</span>
-                            <div class="card-tap-hint">タップで詳細・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
-                                    宮島発 → 平和公園着（約45分, 大人2,400円）<br>
+<a class="site-link-btn" href="https://www.aqua-net-h.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-ship"></i> 世界遺産航路 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 12:40 - 13:25</span><h3 class="card-title serif">ひろしま世界遺産航路</h3><span class="transport-icon">🚤 高速船</span><div class="card-tap-hint">タップで写真・詳細表示 ▼</div></div><div class="card-header-media"><img alt="ひろしま世界遺産航路" class="card-thumb" src="images/miyajima_ferry.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner"><img alt="ひろしま世界遺産航路" class="card-photo" loading="lazy" src="images/miyajima_ferry.jpg"/>
+<div class="card-note">
+                                    宮島発 → 平和公園着（約45分, 大人2,400円）<br/>
                                     川を上り、元安川桟橋（原爆ドーム近く）に直接到着。
                                 </div>
-                                <a href="https://www.aqua-net-h.co.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-ship"></i> 世界遺産航路 公式サイト・予約 ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 13:25 - 13:45</span>
-                            <h3 class="card-title serif">手荷物預け＆休憩</h3>
-                            <span class="transport-icon">🧳 徒歩</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://www.aqua-net-h.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-ship"></i> 世界遺産航路 公式サイト・予約 ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 13:25 - 13:45</span><h3 class="card-title serif">手荷物預け＆休憩</h3><span class="transport-icon">🧳 徒歩</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     おりづるタワー1Fロッカー or 資料館地下1Fロッカー（徒歩約3分）を利用。
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge museum">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 13:45 - 15:15</span>
-                            <h3 class="card-title serif">平和記念公園・資料館</h3>
-                            <span class="transport-icon">🕊️ 徒歩</span>
-                            <img src="images/atomic_dome.jpg" class="card-thumb" alt="原爆ドーム">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/atomic_dome.jpg" alt="原爆ドーム" class="card-photo" loading="lazy">
-                                <div class="card-note">
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge museum">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 13:45 - 15:15</span><h3 class="card-title serif">平和記念公園・資料館</h3><span class="transport-icon">🕊️ 徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="原爆ドーム" class="card-thumb" src="images/atomic_dome.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="原爆ドーム" class="card-photo" loading="lazy" src="images/atomic_dome.jpg"/>
+<div class="card-note">
                                     事前WEB予約推奨（見学約1時間30分）。原爆ドームも合わせて見学。
                                 </div>
-                                <a href="https://hpmmuseum.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-building-columns"></i> 平和記念資料館 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge museum">観光</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 15:15 - 16:20</span>
-                            <h3 class="card-title serif">おりづるタワー</h3>
-                            <span class="transport-icon">🏢 徒歩</span>
-                            <img src="images/orizuru_tower.jpg" class="card-thumb" alt="おりづるタワー">
-                            <div class="card-tap-hint">タップで写真・公式HP ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <img src="images/orizuru_tower.jpg" alt="おりづるタワー" class="card-photo" loading="lazy">
-                                <div class="card-note">
-                                    荷物ピックアップ後、展望フロアへ。<br>
+<a class="site-link-btn" href="https://hpmmuseum.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-building-columns"></i> 平和記念資料館 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge museum">観光</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 15:15 - 16:20</span><h3 class="card-title serif">おりづるタワー</h3><span class="transport-icon">🏢 徒歩</span><div class="card-tap-hint">タップで写真・公式HP ▼</div></div><div class="card-header-media"><img alt="おりづるタワー" class="card-thumb" src="images/orizuru_tower.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<img alt="おりづるタワー" class="card-photo" loading="lazy" src="images/orizuru_tower.jpg"/>
+<div class="card-note">
+                                    荷物ピックアップ後、展望フロアへ。<br/>
                                     広島市街と平和公園を一望。
                                 </div>
-                                <a href="https://www.orizurutower.jp/" target="_blank" rel="noopener noreferrer" class="site-link-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-building"></i> おりづるタワー 公式サイト ↗</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this, event)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 16:30 - 17:00</span>
-                            <h3 class="card-title serif">広島駅へ移動</h3>
-                            <span class="transport-icon">🚕 タクシー</span>
-                            <div class="card-tap-hint">タップで詳細表示 ▼</div>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
-                                    おりづるタワー前から移動（約15分）。<br>
+<a class="site-link-btn" href="https://www.orizurutower.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-building"></i> おりづるタワー 公式サイト ↗</a>
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this, event)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 16:30 - 17:00</span><h3 class="card-title serif">広島駅へ移動</h3><span class="transport-icon">🚕 タクシー</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
+                                    おりづるタワー前から移動（約15分）。<br/>
                                     駅ビルekieでお土産・駅弁を購入。
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 18:18</span>
-                            <h3 class="card-title serif">JR広島駅 出発</h3>
-                            <span class="transport-icon">🚅 新幹線</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+</div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 18:18</span><h3 class="card-title serif">JR広島駅 出発</h3><span class="transport-icon">🚅 新幹線</span><div class="card-tap-hint">タップで写真・詳細表示 ▼</div></div><div class="card-header-media"><img alt="JR広島駅 出発" class="card-thumb" src="images/shinkansen.jpg"/></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner"><img alt="JR広島駅 出発" class="card-photo" loading="lazy" src="images/shinkansen.jpg"/>
+<div class="card-note">
                                     のぞみ54号 13号車08ABCDE（禁煙指定席）
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item scroll-reveal">
-                    <div class="timeline-marker"></div>
-                    <div class="card" onclick="toggleCard(this)">
-                        <span class="badge transport">移動</span>
-                        <div class="card-header">
-                            <span class="card-time"><i class="fa-regular fa-clock"></i> 20:34</span>
-                            <h3 class="card-title serif">JR名古屋駅 到着</h3>
-                            <span class="transport-icon">🚆 電車</span>
-                            <i class="fa-solid fa-chevron-down expand-icon"></i>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-body-inner">
-                                <div class="card-note">
+<a class="site-link-btn" href="https://jr-central.co.jp/" onclick="event.stopPropagation()" rel="noopener noreferrer" target="_blank"><i class="fa-solid fa-train"></i> JR東海 公式サイト ↗</a></div>
+</div>
+</div>
+</div>
+<div class="timeline-item scroll-reveal">
+<div class="timeline-marker"></div>
+<div class="card" onclick="toggleCard(this)">
+<span class="badge transport">移動</span>
+<div class="card-header"><div class="card-header-main"><span class="card-time"><i class="fa-regular fa-clock"></i> 20:34</span><h3 class="card-title serif">JR名古屋駅 到着</h3><span class="transport-icon">🚆 電車</span><div class="card-tap-hint">タップで詳細表示 ▼</div></div><i class="fa-solid fa-chevron-down expand-icon"></i></div>
+<div class="card-body">
+<div class="card-body-inner">
+<div class="card-note">
                                     JR関西本線へ乗りかえ。お疲れ様でした！
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Sections wrapper for easy scrolling via anchor links -->
-        <div id="info-sections">
-            <!-- Tide Chart Section -->
-            <section id="tide" class="info-section">
-                <h2 class="section-title serif">潮位表（宮島）</h2>
-                <p class="ferry-note">厳島神社の風景は潮位によって大きく変わります</p>
-                <div class="tide-grid">
-                    <div class="tide-card">
-                        <h4 class="serif">8月23日 (日)</h4>
-                        <ul class="tide-list">
-                            <li><span class="tide-tag low">干潮</span> 08:28 (58cm)</li>
-                            <li><span class="tide-tag high">満潮</span> 16:32 (143cm) <strong style="color:var(--vermillion);">★夕刻参拝時</strong></li>
-                            <li><span class="tide-tag low">干潮</span> 21:53 (118cm)</li>
-                        </ul>
-                    </div>
-                    <div class="tide-card">
-                        <h4 class="serif">8月24日 (月)</h4>
-                        <ul class="tide-list">
-                            <li><span class="tide-tag high">満潮</span> 02:07 (128cm)</li>
-                            <li><span class="tide-tag low">干潮</span> 09:29 (48cm) <strong style="color:var(--vermillion);">★大鳥居散策</strong></li>
-                            <li><span class="tide-tag high">満潮</span> 16:55 (151cm)</li>
-                            <li><span class="tide-tag low">干潮</span> 22:25 (109cm)</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Ferry Timetable Section -->
-            <section id="ferry" class="info-section">
-                <h2 class="section-title serif">船の時刻表</h2>
-                
-                <h4 class="serif" style="color: var(--navy); margin-bottom: 5px;">宮島口港 → 宮島港（行き）</h4>
-                <p class="ferry-note">所要時間: 約10分 / 大人片道200円 + 宮島訪問税100円</p>
-                <div class="timetable-container">
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>時間帯</th>
-                                <th>JR西日本宮島フェリー<br><small>(9:10〜16:10は大鳥居便)</small></th>
-                                <th>宮島松大汽船</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="highlight-row">
-                                <td style="font-weight:bold;">16時台</td>
-                                <td class="highlight-time">16:10 (大鳥居便) <i class="fa-solid fa-star"></i><br><span style="color:#333;font-size:0.9rem;font-weight:normal;">16:25, 16:40, 16:55</span></td>
-                                <td>16:00, 16:15<br>16:30, 16:45</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold;">17時台</td>
-                                <td>17:10, 17:25<br>17:40, 17:55</td>
-                                <td>17:00, 17:15<br>17:30, 17:45</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h4 class="serif" style="color: var(--navy); margin-bottom: 5px; margin-top: 30px;">ひろしま世界遺産航路</h4>
-                <p class="ferry-note">要事前WEB予約 / 所要時間: 約45分 / 大人2,400円</p>
-                <div class="timetable-container">
-                    <table class="timetable">
-                        <thead>
-                            <tr>
-                                <th>出発</th>
-                                <th>時間</th>
-                                <th>到着</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="highlight-row">
-                                <td style="font-weight:bold;">宮島発</td>
-                                <td class="highlight-time">12:40</td>
-                                <td style="font-weight:bold;">平和公園着 (13:25)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div style="text-align: center; margin-top: 15px;">
-                    <a href="https://www.aqua-net-h.co.jp/" target="_blank" class="map-btn" style="padding: 10px 25px; font-size: 1rem;"><i class="fa-solid fa-ship"></i> アクアネット広島 予約</a>
-                </div>
-            </section>
-
-            <!-- Facility Details Section -->
-            <section id="facility" class="info-section">
-                <h2 class="section-title serif">施設詳細・連絡先</h2>
-                <div class="facility-accordion" id="facility-container">
-                    <!-- Dynamically populated -->
-                </div>
-            </section>
-        </div>
-
-    </main>
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="bottom-nav">
-        <div class="nav-items">
-            <a href="#" class="nav-item active" onclick="switchTabMobile('day1', this); return false;">
-                <i class="fa-solid fa-1"></i>
-                <span>Day 1</span>
-            </a>
-            <a href="#" class="nav-item" onclick="switchTabMobile('day2', this); return false;">
-                <i class="fa-solid fa-2"></i>
-                <span>Day 2</span>
-            </a>
-            <a href="#ferry" class="nav-item" onclick="setActiveNav(this)">
-                <i class="fa-solid fa-ferry"></i>
-                <span>船・潮位</span>
-            </a>
-            <a href="#facility" class="nav-item" onclick="setActiveNav(this)">
-                <i class="fa-solid fa-address-book"></i>
-                <span>施設情報</span>
-            </a>
-        </div>
-    </nav>
-
-    <footer>
-        <h3 class="serif" style="margin-bottom: 15px; font-size: 1.5rem;">広島・呉・宮島 2日間の旅</h3>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;"><i class="fa-regular fa-calendar"></i> 2026.08.23 - 08.24</p>
-    </footer>
-
-    <script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sections wrapper for easy scrolling via anchor links -->
+<div id="info-sections">
+<!-- Tide Chart Section -->
+<section class="info-section" id="tide">
+<h2 class="section-title serif">潮位表（宮島）</h2>
+<p class="ferry-note">厳島神社の風景は潮位によって大きく変わります</p>
+<div class="tide-grid">
+<div class="tide-card">
+<h4 class="serif">8月23日 (日)</h4>
+<ul class="tide-list">
+<li><span class="tide-tag low">干潮</span> 08:28 (58cm)</li>
+<li><span class="tide-tag high">満潮</span> 16:32 (143cm) <strong style="color:var(--vermillion);">★夕刻参拝時</strong></li>
+<li><span class="tide-tag low">干潮</span> 21:53 (118cm)</li>
+</ul>
+</div>
+<div class="tide-card">
+<h4 class="serif">8月24日 (月)</h4>
+<ul class="tide-list">
+<li><span class="tide-tag high">満潮</span> 02:07 (128cm)</li>
+<li><span class="tide-tag low">干潮</span> 09:29 (48cm) <strong style="color:var(--vermillion);">★大鳥居散策</strong></li>
+<li><span class="tide-tag high">満潮</span> 16:55 (151cm)</li>
+<li><span class="tide-tag low">干潮</span> 22:25 (109cm)</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Ferry Timetable Section -->
+<section class="info-section" id="ferry">
+<h2 class="section-title serif">船の時刻表</h2>
+<h4 class="serif" style="color: var(--navy); margin-bottom: 5px;">宮島口港 → 宮島港（行き）</h4>
+<p class="ferry-note">所要時間: 約10分 / 大人片道200円 + 宮島訪問税100円</p>
+<div class="timetable-container">
+<table class="timetable">
+<thead>
+<tr>
+<th>時間帯</th>
+<th>JR西日本宮島フェリー<br/><small>(9:10〜16:10は大鳥居便)</small></th>
+<th>宮島松大汽船</th>
+</tr>
+</thead>
+<tbody>
+<tr class="highlight-row">
+<td style="font-weight:bold;">16時台</td>
+<td class="highlight-time">16:10 (大鳥居便) <i class="fa-solid fa-star"></i><br/><span style="color:#333;font-size:0.9rem;font-weight:normal;">16:25, 16:40, 16:55</span></td>
+<td>16:00, 16:15<br/>16:30, 16:45</td>
+</tr>
+<tr>
+<td style="font-weight:bold;">17時台</td>
+<td>17:10, 17:25<br/>17:40, 17:55</td>
+<td>17:00, 17:15<br/>17:30, 17:45</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 class="serif" style="color: var(--navy); margin-bottom: 5px; margin-top: 30px;">ひろしま世界遺産航路</h4>
+<p class="ferry-note">要事前WEB予約 / 所要時間: 約45分 / 大人2,400円</p>
+<div class="timetable-container">
+<table class="timetable">
+<thead>
+<tr>
+<th>出発</th>
+<th>時間</th>
+<th>到着</th>
+</tr>
+</thead>
+<tbody>
+<tr class="highlight-row">
+<td style="font-weight:bold;">宮島発</td>
+<td class="highlight-time">12:40</td>
+<td style="font-weight:bold;">平和公園着 (13:25)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="text-align: center; margin-top: 15px;">
+<a class="map-btn" href="https://www.aqua-net-h.co.jp/" style="padding: 10px 25px; font-size: 1rem;" target="_blank"><i class="fa-solid fa-ship"></i> アクアネット広島 予約</a>
+</div>
+</section>
+<!-- Facility Details Section -->
+<section class="info-section" id="facility">
+<h2 class="section-title serif">施設詳細・連絡先</h2>
+<div class="facility-accordion" id="facility-container">
+<!-- Dynamically populated -->
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Bottom Navigation -->
+<nav class="bottom-nav">
+<div class="nav-items">
+<a class="nav-item active" href="#" onclick="switchTabMobile('day1', this); return false;">
+<i class="fa-solid fa-1"></i>
+<span>Day 1</span>
+</a>
+<a class="nav-item" href="#" onclick="switchTabMobile('day2', this); return false;">
+<i class="fa-solid fa-2"></i>
+<span>Day 2</span>
+</a>
+<a class="nav-item" href="#ferry" onclick="setActiveNav(this)">
+<i class="fa-solid fa-ferry"></i>
+<span>船・潮位</span>
+</a>
+<a class="nav-item" href="#facility" onclick="setActiveNav(this)">
+<i class="fa-solid fa-address-book"></i>
+<span>施設情報</span>
+</a>
+</div>
+</nav>
+<footer>
+<h3 class="serif" style="margin-bottom: 15px; font-size: 1.5rem;">広島・呉・宮島 2日間の旅</h3>
+<p style="color: rgba(255,255,255,0.7); font-size: 0.95rem;"><i class="fa-regular fa-calendar"></i> 2026.08.23 - 08.24</p>
+</footer>
+<script>
         // Progress Bar
         window.onscroll = function() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
