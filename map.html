@@ -335,6 +335,71 @@
             font-weight: bold;
         }
 
+        /* Legend Close Button */
+        .legend-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .legend-close-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            color: #888;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+        }
+
+        .legend-close-btn:hover {
+            color: var(--accent);
+        }
+
+        .legend-toggle-btn {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--primary);
+            cursor: pointer;
+            border: 1px solid var(--gold);
+            display: none;
+        }
+
+        /* Mobile Height Control Bar */
+        .height-control-bar {
+            display: none;
+            justify-content: space-around;
+            align-items: center;
+            background: #eaeaea;
+            padding: 4px 8px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .height-btn {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #444;
+            cursor: pointer;
+        }
+
+        .height-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
@@ -342,9 +407,19 @@
             }
             .side-panel {
                 width: 100%;
-                height: 40vh;
+                height: 38vh;
                 border-top: 1px solid #ddd;
-                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+                transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .side-panel.height-expanded {
+                height: 75vh;
+            }
+            .side-panel.height-collapsed {
+                height: 55px;
+            }
+            .height-control-bar {
+                display: flex;
             }
             header h1 {
                 font-size: 1rem;
@@ -361,7 +436,13 @@
 
     <div class="container">
         <!-- Side Panel -->
-        <div class="side-panel">
+        <div class="side-panel" id="sidePanel">
+            <div class="height-control-bar">
+                <span style="font-size: 0.75rem; color: #555; font-weight: bold;">行程表示:</span>
+                <button class="height-btn" onclick="setPanelHeight('collapsed', this)">畳む ⬇</button>
+                <button class="height-btn active" onclick="setPanelHeight('normal', this)">標準 ↕</button>
+                <button class="height-btn" onclick="setPanelHeight('expanded', this)">広げる ⬆</button>
+            </div>
             <div class="player-controls">
                 <div class="btn-group">
                     <button id="btnPlay" class="btn btn-play" onclick="togglePlay()">
@@ -705,6 +786,61 @@
             }, 2500); // Wait for flyTo to finish
         }
 
+        // Add Legend Control with Close Button
+        const legend = L.control({ position: 'bottomright' });
+        legend.onAdd = function() {
+            const div = L.DomUtil.create('div', 'map-legend');
+            div.id = 'mapLegend';
+            div.innerHTML = `
+                <div class="legend-header">
+                    <span>移動手段</span>
+                    <button class="legend-close-btn" onclick="toggleLegend(false)" title="閉じる">×</button>
+                </div>
+                <div class="legend-item"><span class="legend-line line-train"></span> 電車 / 新幹線</div>
+                <div class="legend-item"><span class="legend-line line-taxi"></span> タクシー</div>
+                <div class="legend-item"><span class="legend-line line-ferry"></span> フェリー / 高速船</div>
+                <div class="legend-item"><span class="legend-line line-walk"></span> 徒歩</div>
+            `;
+            return div;
+        };
+        legend.addTo(map);
+
+        // Add Legend Open Toggle Button
+        const legendToggle = L.control({ position: 'bottomright' });
+        legendToggle.onAdd = function() {
+            const btn = L.DomUtil.create('button', 'legend-toggle-btn');
+            btn.id = 'legendToggleBtn';
+            btn.innerHTML = '🗺️ 凡例';
+            btn.onclick = function() { toggleLegend(true); };
+            return btn;
+        };
+        legendToggle.addTo(map);
+
+        function toggleLegend(show) {
+            const legendEl = document.getElementById('mapLegend');
+            const toggleBtn = document.getElementById('legendToggleBtn');
+            if (show) {
+                legendEl.style.display = 'block';
+                toggleBtn.style.display = 'none';
+            } else {
+                legendEl.style.display = 'none';
+                toggleBtn.style.display = 'block';
+            }
+        }
+
+        // Mobile Side Panel Height Toggle
+        function setPanelHeight(mode, btnElement) {
+            const sidePanel = document.getElementById('sidePanel');
+            document.querySelectorAll('.height-btn').forEach(b => b.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+            
+            sidePanel.classList.remove('height-expanded', 'height-collapsed');
+            if (mode === 'expanded') {
+                sidePanel.classList.add('height-expanded');
+            } else if (mode === 'collapsed') {
+                sidePanel.classList.add('height-collapsed');
+            }
+        }
     </script>
 </body>
 </html>
